@@ -1,0 +1,31 @@
+= Extended Recommendations Dataset
+
+This is an extended version of the link:https://github.com/neo4j-graph-examples/recommendations[recommendations^] dataset.
+
+The original recommendations dataset was extracted from the dump file into a series of CSV files.
+
+Faker is used to generate additional data including:
+
+* Additional `User` properties
+* `Stream` nodes and relationships
+* `PURCHASED` relationships between `User` and `Movie`
+
+== Data Model
+
+image::docs/data_model.png[data model]
+
+== Structure
+
+- data/csv - CSV files containing the data
+- data/cypher - Cypher scripts to export / load the data into Neo4j
+- data/data-importer - Data Importer models for the original and extended datasets
+- generate - Python scripts to generate the extended dataset
+- requirements.txt - Python dependencies
+
+== Generate the dataset
+
+To "re-generate" the dataset, run:
+
+```
+python generate/generate.py
+```
