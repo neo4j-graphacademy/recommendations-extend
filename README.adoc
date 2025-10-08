@@ -7,12 +7,13 @@ The original recommendations dataset was extracted from the dump file into a ser
 Faker is used to generate additional data including:
 
 * Additional `User` properties
-* `Stream` nodes and relationships
+* `Address` nodes and `LIVES_AT` relationships
+* `Stream` nodes and `STARTED` and `STREAMED` relationships
 * `PURCHASED` relationships between `User` and `Movie`
 
 == Data Model
 
-image::docs/data_model.png[data model]
+image::docs/data-model.png[data model]
 
 == Structure
 
@@ -30,4 +31,4 @@ To "re-generate" the dataset, run:
 python generate/generate.py
 ```
 
-Constants can be adjusted in `generate/constants.py` to change the number of users, streams and purchases generated.
+Constants can be adjusted in `generate/constants.py` to change the number of entities generated.

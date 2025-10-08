@@ -1,7 +1,7 @@
 :param {
   // Define the file path root and the individual file names required for loading.
-  // https://raw.githubusercontent.com/neo4j-graphacademy/recommendations-extend/refs/heads/main/recommendations-extended/data/csv
-  file_path_root:'file:///', // Change this to the folder your script can access the files at.
+  // file_path_root:'file:///', Use this for local import
+  file_path_root:'https://raw.githubusercontent.com/neo4j-graphacademy/recommendations-extend/refs/heads/main/recommendations-extended/data/csv/', 
   file_person:'recommendations-nodes-Person.csv',
   file_movie:'recommendations-nodes-Movie.csv',
   file_user:'extended-nodes-User.csv',
