@@ -1,14 +1,14 @@
 import csv
 from faker import Faker
 
-EXISTING_USER_CSV_FILE = "data/csv/recommendations-nodes-User.csv"
+from constants import USER_CSV_FILE
 
-def generate_users(number, seed):
+def generate_users(number, seed, addresses):
     Faker.seed(seed)
     fake = Faker()
 
     # load existing user names
-    with open(EXISTING_USER_CSV_FILE, "r") as existing_user_file:
+    with open(USER_CSV_FILE, "r") as existing_user_file:
 
         user_csv = csv.DictReader(
             existing_user_file,
@@ -28,7 +28,7 @@ def generate_users(number, seed):
         users.append({
             'userId': i,
             'name': name,
-            'address': fake.address(),
+            'postal_address': fake.random_element(elements=addresses)['postal_address'],
             'email': f"{name.replace(" ", ".").lower()}@{fake.domain_name()}",
             'phone': fake.phone_number()
         })
@@ -36,4 +36,6 @@ def generate_users(number, seed):
     return users
 
 if __name__ == "__main__":
-    print(generate_users(10, 486436149))
+    from address import generate_addresses
+    from constants import SEED
+    print(generate_users(10, 486436149, generate_addresses(5, SEED)))

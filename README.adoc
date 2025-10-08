@@ -29,3 +29,5 @@ To "re-generate" the dataset, run:
 ```
 python generate/generate.py
 ```
+
+Constants can be adjusted in `generate/constants.py` to change the number of users, streams and purchases generated.

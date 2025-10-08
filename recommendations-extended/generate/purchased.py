@@ -2,7 +2,7 @@ import pandas as pd
 from faker import Faker
 from datetime import date
 
-RATED_CSV_FILE = "data/csv/recommendations-relationships-RATED.csv"
+from constants import RATED_CSV_FILE
 
 def generate_purchases(number, seed, number_of_users):
     Faker.seed(seed)
@@ -29,5 +29,5 @@ def generate_purchases(number, seed, number_of_users):
     return orders
 
 if __name__ == "__main__":
-    print(generate_purchases(10, 486436149, 1000, 164979))
+    print(generate_purchases(10, 486436149, 100))
     

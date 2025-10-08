@@ -2,7 +2,7 @@ import pandas as pd
 from faker import Faker
 from datetime import date
 
-RATED_CSV_FILE = "data/csv/recommendations-relationships-RATED.csv"
+from constants import RATED_CSV_FILE
 
 
 def generate_streams(number, seed, number_of_users):
@@ -14,9 +14,9 @@ def generate_streams(number, seed, number_of_users):
     # create avg rating dataframe, higher rated movies are more likely to be completed
     avg_rating_df = ratings_df.groupby("movie_movieId")["rating"].agg("mean")
 
-    def purchase_likelihood(movie_id):
+    def complete_likelihood(movie_id):
         rating = avg_rating_df.get(movie_id, default=3)
-        # Higher ratings increase the likelihood of being purchased
+        # Higher ratings increase the likelihood of being complete
         if rating < 1:
             return 50
         elif rating < 2:
@@ -30,7 +30,7 @@ def generate_streams(number, seed, number_of_users):
 
     streams = []
     for i in range(1, number + 1):
-        movie_id = ratings_df.iloc[fake.pyint(0, len(ratings_df)-1)].name
+        movie_id = int(ratings_df.iloc[fake.pyint(0, len(ratings_df)-1)].movie_movieId)
         streams.append({
             'streamId': i,
             'movieId': movie_id,
@@ -39,9 +39,9 @@ def generate_streams(number, seed, number_of_users):
                 date(2024, 1, 1),
                 date(2024, 12, 31)
                 ),
-            'completed': fake.pybool(purchase_likelihood(movie_id)),
+            'completed': fake.pybool(complete_likelihood(movie_id)),
         })
     return streams
 
 if __name__ == "__main__":
-    print(generate_streams(10, 486436149, 1000))
+    print(generate_streams(10, 486436149, 100))
